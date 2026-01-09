@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Subject Quiz Maker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .subject-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .subject-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            position: relative;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .subject-card.loaded {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .subject-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .subject-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .subject-status {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .upload-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .upload-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        select {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .file-input-label:hover {
+            background: #5568d3;
+        }
+
+        .format-info {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .format-info h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .quiz-section {
+            display: none;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .current-subject {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .score-section {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .score-display {
+            font-size: 48px;
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .score-message {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #667eea;
+            transition: width 0.3s;
+        }
+
+        .loaded-subjects {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .loaded-subjects h3 {
+            color: #28a745;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .subject-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .subject-tag {
+            background: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #28a745;
+            border: 2px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Multi-Subject Quiz Maker</h1>
+        <p class="subtitle">Upload questions for different subjects and start learning!</p>
+
+        <div id="mainSection">
+            <div class="upload-section">
+                <h2 style="margin-bottom: 20px; color: #333;">Upload Questions by Subject</h2>
+                
+                <div class="upload-controls">
+                    <select id="subjectSelect">
+                        <option value="">Select a subject...</option>
+                        <option value="Mathematics">📐 Mathematics</option>
+                        <option value="Science">🔬 Science</option>
+                        <option value="History">📜 History</option>
+                        <option value="Geography">🌍 Geography</option>
+                        <option value="English">📖 English</option>
+                        <option value="Physics">⚛️ Physics</option>
+                        <option value="Chemistry">🧪 Chemistry</option>
+                        <option value="Biology">🧬 Biology</option>
+                        <option value="Computer Science">💻 Computer Science</option>
+                        <option value="Literature">📚 Literature</option>
+                        <option value="Arts">🎨 Arts</option>
+                        <option value="Music">🎵 Music</option>
+                        <option value="Economics">💰 Economics</option>
+                        <option value="Philosophy">🤔 Philosophy</option>
+                        <option value="Psychology">🧠 Psychology</option>
+                    </select>
+                    
+                    <div class="file-input-wrapper">
+                        <input type="file" id="fileInput" accept=".txt">
+                        <label for="fileInput" class="file-input-label">
+                            📄 Upload Questions File
+                        </label>
+                    </div>
+                </div>
+
+                <div id="loadedSubjects" style="display: none;" class="loaded-subjects">
+                    <h3>✅ Loaded Subjects</h3>
+                    <div class="subject-list" id="subjectList"></div>
+                </div>
+
+                <div class="format-info">
+                    <h3>📋 File Format Instructions:</h3>
+                    <p>Create a .txt file with questions in this format:</p>
+                    <pre style="background: #f0f0f0; padding: 10px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">Q: What is 2 + 2?
+A: 3
+B: 4
+C: 5
+D: 6
+ANSWER: B
+
+Q: What is the square root of 16?
+A: 2
+B: 4
+C: 6
+D: 8
+ANSWER: B</pre>
+                    <p style="margin-top: 10px;"><strong>Note:</strong> Upload a separate file for each subject.</p>
+                </div>
+            </div>
+
+            <div class="subject-selection" id="subjectGrid"></div>
+        </div>
+
+        <div class="quiz-section" id="quizSection">
+            <div class="quiz-header">
+                <div class="current-subject" id="currentSubject"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div id="questionContainer"></div>
+            <div class="nav-buttons">
+                <button class="btn-secondary" onclick="backToSubjects()">← Back to Subjects</button>
+                <div style="display: flex; gap: 15px;">
+                    <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">← Previous</button>
+                    <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                    <button class="btn-success" id="submitBtn" onclick="submitQuiz()" style="display: none;">Submit Quiz</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="score-section" id="scoreSection">
+            <h2>🎉 Quiz Complete!</h2>
+            <div class="current-subject" id="scoreSubject" style="margin: 20px 0; color: #667eea;"></div>
+            <div class="score-display" id="scoreDisplay"></div>
+            <p class="score-message" id="scoreMessage"></p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button class="btn-secondary" onclick="backToSubjects()">← Back to Subjects</button>
+                <button class="btn-primary" onclick="retakeQuiz()">Retake This Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let subjectData = {};
+        let currentSubject = '';
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let quizSubmitted = false;
+
+        const subjectIcons = {
+            'Mathematics': '📐',
+            'Science': '🔬',
+            'History': '📜',
+            'Geography': '🌍',
+            'English': '📖',
+            'Physics': '⚛️',
+            'Chemistry': '🧪',
+            'Biology': '🧬',
+            'Computer Science': '💻',
+            'Literature': '📚',
+            'Arts': '🎨',
+            'Music': '🎵',
+            'Economics': '💰',
+            'Philosophy': '🤔',
+            'Psychology': '🧠'
+        };
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const subject = document.getElementById('subjectSelect').value;
+            
+            if (!subject) {
+                alert('Please select a subject first!');
+                this.value = '';
+                return;
+            }
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    parseQuestions(e.target.result, subject);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function parseQuestions(text, subject) {
+            const questions = [];
+            const blocks = text.trim().split('\n\n');
+            
+            blocks.forEach(block => {
+                const lines = block.trim().split('\n');
+                if (lines.length < 6) return;
+
+                const questionLine = lines.find(l => l.startsWith('Q:'));
+                const answerLine = lines.find(l => l.startsWith('ANSWER:'));
+                const options = lines.filter(l => /^[A-D]:/.test(l));
+
+                if (questionLine && answerLine && options.length === 4) {
+                    questions.push({
+                        question: questionLine.substring(2).trim(),
+                        options: options.map(opt => ({
+                            letter: opt.charAt(0),
+                            text: opt.substring(2).trim()
+                        })),
+                        correctAnswer: answerLine.split(':')[1].trim()
+                    });
+                }
+            });
+
+            if (questions.length > 0) {
+                subjectData[subject] = questions;
+                updateSubjectGrid();
+                updateLoadedSubjects();
+                document.getElementById('fileInput').value = '';
+                document.getElementById('subjectSelect').value = '';
+                alert(`✅ ${questions.length} questions loaded for ${subject}!`);
+            } else {
+                alert('No valid questions found. Please check your file format.');
+            }
+        }
+
+        function updateLoadedSubjects() {
+            const subjects = Object.keys(subjectData);
+            if (subjects.length > 0) {
+                document.getElementById('loadedSubjects').style.display = 'block';
+                document.getElementById('subjectList').innerHTML = subjects
+                    .map(s => `<span class="subject-tag">${subjectIcons[s] || '📚'} ${s}</span>`)
+                    .join('');
+            }
+        }
+
+        function updateSubjectGrid() {
+            const grid = document.getElementById('subjectGrid');
+            const subjects = Object.keys(subjectData);
+            
+            if (subjects.length === 0) {
+                grid.innerHTML = '';
+                return;
+            }
+            
+            grid.innerHTML = subjects.map(subject => `
+                <div class="subject-card loaded" onclick="startQuiz('${subject}')">
+                    <div class="subject-icon">${subjectIcons[subject] || '📚'}</div>
+                    <div class="subject-name">${subject}</div>
+                    <div class="subject-status">${subjectData[subject].length} questions</div>
+                </div>
+            `).join('');
+        }
+
+        function startQuiz(subject) {
+            currentSubject = subject;
+            currentQuestion = 0;
+            userAnswers = new Array(subjectData[subject].length).fill(null);
+            quizSubmitted = false;
+            
+            document.getElementById('mainSection').style.display = 'none';
+            document.getElementById('quizSection').style.display = 'block';
+            document.getElementById('currentSubject').textContent = `${subjectIcons[subject] || '📚'} ${subject}`;
+            
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const questions = subjectData[currentSubject];
+            const q = questions[currentQuestion];
+            const container = document.getElementById('questionContainer');
+            
+            let optionsHTML = '';
+            q.options.forEach(opt => {
+                const selectedClass = userAnswers[currentQuestion] === opt.letter ? 'selected' : '';
+                let resultClass = '';
+                
+                if (quizSubmitted) {
+                    if (opt.letter === q.correctAnswer) {
+                        resultClass = 'correct';
+                    } else if (userAnswers[currentQuestion] === opt.letter) {
+                        resultClass = 'incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="option ${selectedClass} ${resultClass}" 
+                         onclick="${quizSubmitted ? '' : 'selectAnswer(\'' + opt.letter + '\')'}">
+                        <strong>${opt.letter}:</strong> ${opt.text}
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                </div>
+            `;
+
+            updateNavButtons();
+            updateProgressBar();
+        }
+
+        function selectAnswer(letter) {
+            if (quizSubmitted) return;
+            userAnswers[currentQuestion] = letter;
+            displayQuestion();
+        }
+
+        function nextQuestion() {
+            const questions = subjectData[currentSubject];
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        function updateNavButtons() {
+            const questions = subjectData[currentSubject];
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').style.display = 
+                currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+            document.getElementById('submitBtn').style.display = 
+                currentQuestion === questions.length - 1 && !quizSubmitted ? 'inline-block' : 'none';
+        }
+
+        function updateProgressBar() {
+            const questions = subjectData[currentSubject];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function submitQuiz() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            if (unanswered > 0) {
+                if (!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) {
+                    return;
+                }
+            }
+
+            quizSubmitted = true;
+            const questions = subjectData[currentSubject];
+            let score = 0;
+            
+            userAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correctAnswer) {
+                    score++;
+                }
+            });
+
+            const percentage = Math.round((score / questions.length) * 100);
+            
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('scoreSection').style.display = 'block';
+            document.getElementById('scoreSubject').textContent = `${subjectIcons[currentSubject] || '📚'} ${currentSubject}`;
+            document.getElementById('scoreDisplay').textContent = `${score} / ${questions.length}`;
+            
+            let message = '';
+            if (percentage >= 90) message = 'Outstanding! 🌟';
+            else if (percentage >= 70) message = 'Great job! 👍';
+            else if (percentage >= 50) message = 'Good effort! 💪';
+            else message = 'Keep practicing! 📚';
+            
+            document.getElementById('scoreMessage').textContent = `${percentage}% - ${message}`;
+        }
+
+        function backToSubjects() {
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('scoreSection').style.display = 'none';
+            document.getElementById('mainSection').style.display = 'block';
+            quizSubmitted = false;
+        }
+
+        function retakeQuiz() {
+            document.getElementById('scoreSection').style.display = 'none';
+            startQuiz(currentSubject);
+        }
+    </script>
+</body>
+</html>
