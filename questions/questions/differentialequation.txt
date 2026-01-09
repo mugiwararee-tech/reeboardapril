@@ -1,0 +1,286 @@
+# DIFFERENTIAL EQUATION REVIEW PROBLEMS
+
+1. Determine the order and degree of the differential equation, 2x(d⁴y/dx⁴) + 5x²((d²y/dx²)³ - xy = 0
+   A. Fourth order, third degree
+   B. Fourth order, first degree
+   C. First order, fourth degree
+   D. First order, fourth degree
+   Answer: B
+
+2. A solution containing several arbitrary constants equal to the order of the equation is called
+   A. Singular solution
+   B. linear solution
+   C. general solution
+   D. none of the above
+   Answer: C
+
+3. Find the differential equation whose general solution is y = C(x square) + 1
+   A. xy' = 2(1 - y)
+   B. x' = 2(y - 1)
+   C. xy' = 2(y - 1)
+   D. x = y' - 1
+   Answer: A
+
+4. Find the differential equation of a curve whose general solution is y = C₁x + C₂eˣ
+   A. (x - 1) y'' - xy' + y = 0
+   B. (x - 1) y'' + xy' - y = 0
+   C. (x + 1) y'' - xy' + y = 0
+   D. (x + 1) y'' + xy' + y = 0
+   Answer: A
+
+5. Find the general solution of dy/dx + 5y = 0.
+   A. y = Ce⁻⁵ˣ
+   B. y = Ceˣ
+   C. y = Ce⁵ˣ
+   D. y = 5Ceˣ
+   Answer: A
+
+6. Solve for the general solution of the differential equation: (D + 10)y = 0
+   A. y² = Ce⁻¹⁰ˣ
+   B. y = Ce⁻¹⁰ˣ
+   C. y = Cx
+   D. y = Cxˣ
+   Answer: B
+
+7. April 2003#37. Find the particular solution of the differential equation dx/dt = x - 1, x(0) = 1.
+   A. x = 0
+   B. x = 1
+   C. x = -1
+   D. x = 1/2
+   Answer: B
+
+8. Solve the differential equation dy/dx = xy/x(y - 3).
+   A. x² times y²e⁻ˣ = ceʸ
+   B. x² times y³ = ceʸ
+   C. x^4 times y² = ceʸ
+   D. x^4 times y³ = ceʸ
+   Answer: D
+
+9. Solve the differential equation cot x dy + ydx = 0.
+   A. y = C tan x
+   B. y = C cot x
+   C. y = C sin x
+   D. y = C cos x
+   Answer: D
+
+10. Find the value of A in the equation:
+    (x²+4x²+10)/(x²+2x²+5x) = A/(x) + B(2x+2)/(x²+2x²+5) + C/(x²+2x²+5)
+    A. 1
+    B. 2
+    C. 0
+    D. 3
+    Answer: B
+
+11. What is the equation of the curve where every point of which the tangent line has a slope of 4x?
+    A. 2x² + C
+    B. (1/2) x² + C
+    C. (1/2)2ˣ + C
+    D. x² + C
+    Answer: A
+
+12. Determine the differential equation of the family of lines passing through (h,k)
+    A. (y-h) dx - (x-k) dy = 0
+    B. (x-h) dx - (y-k) dy = 0
+    C. (h+k) dx - (x+k) dy = 0
+    D. (y - k) dx - (x-h) dy = 0
+    Answer: D
+
+13. Solve the differential equation (x - 1) dx + (x + 1) dx + (y - 1) dy + (1 + y) dy = 0 if when x = 0 then y = 1.
+    A. 1.45
+    B. 2.5
+    C. 4.13
+    D. 3.45
+    Answer: D
+
+14. Determine the solution to the differential equation. (xy + y²)dx - x²dy = 0 if y = 1 when x = 1.
+    A. x = exp (1 - y/x)
+    B. x = exp (1 - x/y)
+    C. x = -exp (1 - y/x)
+    D. y = exp (1 - x/y)
+    Answer: B
+
+15. If dx = x dx, what is the equation of y in terms of x if the curve passes though (1, 1)?
+    A. x² + 3y - 4 = 0
+    B. x^3 - 3y + 2 = 0
+    C. x² - 3y + 3 = 0
+    D. 2y + x - 3 = 0
+    Answer: B
+
+16. Solve (x + y)dx = (x - y)dx
+    A. (x square) + (y square) = C
+    B. (x square) - 2xy - (y square) = C
+    C. (x square) + 2xy + (y square) = C
+    D. (x square) + 2xy - (y square) = C
+    Answer: B
+
+17. Which of the following equations is an exact differential equation?
+    A. x dx + (3x - 2y) dy = 0
+    B. (2xy + x) dx + (x² + y) dy = 0
+    C. y² dx + (2x + 3y) dy = 0
+    D. (x² + 1) dx - xy dy = 0
+    Answer: B
+
+18. The differential equation dx - 5y dx + 2x²dy dx + 2x²dx - dy is an
+    A. exact DE
+    B. homogeneous DE
+    C. FOLDE
+    D. homogenous
+    Answer: B
+
+19. Find the particular solution of xdy + 2y dx = 7x² dx passing thru points (1, 2)
+    A. y = x^7 + x^-2
+    B. y = x^-7 + x^-2
+    C. y = x^7 + x^2
+    D. y = x^-7 + x^2
+    Answer: A
+
+20. What is the general solution of the differential equation (d²y/dx²) + 4y = 0?
+    A. y = C₁ sin 2x + C₂ cos 2x
+    B. y = C₁ sinh 2x + C₂ cosh 2x
+    C. y = C₁ sin 2x + C₂ cos -2x
+    D. y = eˣ(C₁ sin 2x + C₂ cos 2x)
+    Answer: A
+
+21. Find all values of m for which y = eᵐˣ is a solution of 6y'' - y'-y = 0 on (- infinity, + infinity)
+    A. m = 1/2, 2, 3
+    B. m = -1, 2, 3
+    C. m = -3, 1/3
+    D. m = -1/3, 1/2
+    Answer:  D
+
+22. Find the general solution of 6y''' - 3y'' + 3y' - y = 0
+    I. Ceˣ    II. eˣ + (C₂x + C₃)    III. eˣ(C₁ + C₂x)
+    A. I and II
+    B. II only
+    C. I and III
+    D. III only
+    Answer: A
+
+23. Find the particular solution of (d²y/dx²) + (dy/dx) - 6y = 0. When t = 0, y = 0, dy/dx = 10.
+    A. y = 5e⁻²ˣ - 5e⁻³ˣ
+    B. y = 2e⁻²ˣ - 2e⁻³ˣ
+    C. y = 6e⁻²ˣ + 6e⁻³ˣ
+    D. y = -10e⁻²ˣ + 10e⁻³ˣ
+    Answer: D
+
+24. Solve the differential equation d²x/dt² + x = 0, with initial conditions x(0) = 10, x'(0) = 0
+    A. x(t) = 10 cos 2t 
+    B. x(t) = 10 cos + 10 sin 2t
+    C. x(t) = 10 cos t + 10sin t
+    D. x(t) = 10 sin 2t
+    Answer: A
+
+25. What is the particular solution of the different equation: D(D + 10) = 0
+    Where D is the differential operator d/dx
+    A. 0.479C₁ + 0.878C₂ + 0.368C₃
+    B. 0.841C₁ + 0.878C₂ + 0.607C₃
+    C. 0.479C₁ + 0.878C₂ + 0.368C₃
+    D. 0.479C₁ + 0.878C₂ + 0.607C₃
+    Answer: D
+
+26. Solve for the general solution of the differential equation: (D + 3)(D² + 3D + 2) = 0 Where D is the differential operator d/dx given that y = 1 when x = 0, y' = 4 when x = 0 in terms of the constant of integration.
+    A. 2.718C₁ + 7.389C₂ + 20.086C₃
+    B. 0.368C₁ + 7.389C₂ + 20.086C₃
+    C. 0.368C₁ + 0.135C₂ + 0.500C₃
+    D. 0.368C₁ + 0.135C₂ + 20.086C₃
+    Answer: C
+
+27. Find the general solution of y''' + 10y' + 41y = 0?
+    A. y = e^-5x (c cos 4x + c sin 4x)
+    B. y = e³ˣ (c cos 4x + c sin 4x)
+    C. y = eˣ (c cos 5x + c sin 5x)
+    D. y = e³ˣ (c cos 5x + c sin 5x)
+    Answer: A
+
+28. For the linear differential equation L(D) y = 6e²ˣ where L(D) is the linear differential operator
+    L(D) = D2 + 2D + 3
+    Find the particular solution of y.
+    A. y = (6/11)e²ˣ
+    B. y = (11/6) e⁻²ˣ
+    C. y = (6/11) e⁻²ˣ
+    D. y = (11/6) e²ˣ
+    Answer: A
+
+29. Solve the differential equation y''' - 4 y' + 3y = sin x
+    A. y(x) = C₁ eˣ 3x + C₂ eˣˣ + 1/5 cos x + 1/10 sin x
+    B. y(x) = C₁ eˣ 3x + C₂ eˣˣ sin x
+    C. y(x) = C₁ sin 3x + C₂x + cos 3x
+    D. y(x) = C₁ sin x + C₂x + 1/10 sin x
+    Answer: A
+
+30. Find a general solution to the differential equation y''' - 2y' + y = x eˣ + 4, y(0) = 1, y'(0) = 1
+    A. y = eˣ + xeˣ - ½ eˣ ln(1 + x²) + 2 x(arctan)
+    B. y = -3 eˣ + 4xeˣ + (1/6) x³ eˣ + 4
+    C. y = -3 eˣ + 4 xeˣ - 2/3 xeˣ - 2/9 eˣ
+    D. y = eˣcosx + eˣsinx + ½ eˣcosx lnlcosx| + ½ xeˣsinx
+    Answer: B
+
+31. When a bullet is fired into a sand bag, it will be assumed that the retardation is equal to the square root of its velocity on entering. For how long will it travel if the velocity on entering the bag is 144 ft/sec?
+    A. 28 sec
+    B. 24 sec
+    C. 25 sec
+    D. 26 sec
+    Answer: B
+
+32. A culture of bacteria initially contains 1,000 bacteria. If this quantity doubles every hour. Determine the quantity of bacteria in the culture after 4 hours.
+    A. 4000
+    B. 16000
+    C. 8000
+    D. 32000
+    Answer: B
+
+33. A culture of bacteria initially contains 1,000 bacteria. If this quantity doubles every hour. When will the culture contains 64,000 bacteria?
+    A. 5
+    B. 7
+    C. 6
+    D. 8
+    Answer: C
+
+34. Radium decomposes approximately at a rate proportional to the amount present. If 100 gm now, will be 96 gm a hundred years later, find the half-life of Radium.
+    A. 1698
+    B. 1869
+    C. 1968
+    D. 1689
+    Answer: A
+
+35. Radium decomposes approximately at a rate proportional to the amount present. If 100 gm now, will be 96 gm a hundred years later, find the half-life of Radium, find the time it takes for 25 grams to decompose?
+    A. 993.25
+    B. 4389.20
+    C. 2691.23
+    D. 2961.23
+    Answer: C
+
+36. If the half-life of a substance is 1200 yrs, find the value of decay constant.
+    A. 5.78x10⁻⁴
+    B. 8.33x10⁻⁴
+    C. 0.693
+    D. 1200
+    Answer: A
+
+37. A glass of hot milk at 100°C is brought in a room where the temperature is maintained at 20°C. After 15 minutes the temperature goes down to 90°C. Find the temperature of the glass of milk after 10 more minutes.
+    A. 64.08°C
+    B. 73.19°C
+    C. 84.01°C
+    D. 93.19°C
+    Answer: C
+
+38. Find the time it takes until the temperature goes down to 37°C.
+    A. 173.98 min
+    B. 195.79 min
+    C. 96.11 min
+    D. 173.98 min
+    Answer: A
+
+39. Suppose that a motorboat is moving at 40 ft/s when its motor shuts, and that 10 secs later the boat has slowed down to 20 ft/s. Assuming a resistance proportional to the square of the velocity such the dv/dt = -kv². How far will the motorboat coast on the first minute after its motor shuts?
+    A. 420 ln 4 ft
+    B. 880 ln 2 ft
+    C. 440 ln 2 ft
+    D. 400 ln 7 ft
+    Answer: D
+
+40. A tank initially contains 100 gallons of fresh water in which 50 lbs of salt has been dissolved. Brine containing 2 lbs/gal of salt flows into the tank at the rate of 3 gal/min and is kept uniform by stirring then flowing out the tank at 2 gal/min. Find the amount of salt in the tank after 1/2 hrs.
+    A. 171.2426 lbs
+    B. 121.2426 lbs
+    C. 117.2426 lbs
+    D. 112.2426 lbs
+    Answer: A
